@@ -242,7 +242,7 @@ public final class Bootstrap {
     }
 
 
-    /**
+    /** 1.加载ClassLoader；2.反射创建Catalina实例；3.反射调用Catalina的setParentClassLoader()方法，设置Catalina的父类加载器；5.设置BootStrap的属性catalina指向刚创建的Catalina对象
      * Initialize daemon.
      * @throws Exception Fatal initialization error
      */
@@ -437,8 +437,16 @@ public final class Bootstrap {
         synchronized (daemonLock) {
             if (daemon == null) {
                 // Don't set daemon until init() has completed
+                //创建Bootstrap启动类对象
                 Bootstrap bootstrap = new Bootstrap();
                 try {
+                    //调用启动类对象 Bootstrap的初始化方法，在初始化方法中做了一下几件事情
+                    /*
+                    1.加载ClassLoader；
+                    2.反射创建Catalina实例；
+                    3.反射调用Catalina的setParentClassLoader()方法，设置Catalina的父类加载器；
+                    5.设置BootStrap的属性catalina指向刚创建的Catalina对象
+                     */
                     bootstrap.init();
                 } catch (Throwable t) {
                     handleThrowable(t);
@@ -469,7 +477,10 @@ public final class Bootstrap {
                 daemon.stop();
             } else if (command.equals("start")) {
                 daemon.setAwait(true);
+                //加载xml文件
+                //实际上是调用Catalina的load()方法
                 daemon.load(args);
+                //
                 daemon.start();
                 if (null == daemon.getServer()) {
                     System.exit(1);

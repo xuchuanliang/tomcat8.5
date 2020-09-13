@@ -843,7 +843,7 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
                 cl = cl.getParent();
             }
         }
-        // Initialize our defined Services
+        // Initialize our defined Services  执行完StandardServer的initInternal()方法之后，执行StandardService的initInternal()方法
         for (Service service : services) {
             service.init();
         }

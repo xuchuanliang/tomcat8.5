@@ -230,7 +230,7 @@ public class StandardEngine extends ContainerBase implements Engine {
 
     }
 
-
+    //在StandardEngine的super.initInternal()中会创建阻塞队列以及线程池，也就是每一个Engine持有一个线程池
     @Override
     protected void initInternal() throws LifecycleException {
         // Ensure that a Realm is present before any attempt is made to start
