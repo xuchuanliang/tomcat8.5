@@ -1,0 +1,7 @@
+-Dfile.encoding=utf-8
+-Dcatalina.home=home
+-Dcatalina.base=home
+-Djava.endorsed.dirs=home/endorsed
+-Djava.io.tmpdir=home/temp
+-Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+-Djava.util.logging.config.file=home/conf/logging.properties
