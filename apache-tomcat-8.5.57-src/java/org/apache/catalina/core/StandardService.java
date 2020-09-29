@@ -527,7 +527,7 @@ public class StandardService extends LifecycleMBeanBase implements Service {
      */
     @Override
     protected void initInternal() throws LifecycleException {
-
+        System.out.println("------------------------------->开始Service初始化：StandardService.init()");
         super.initInternal();
         //执行StandardService的initInternal()方法中会继续执行StandardEngine的initInternal()方法
         if (engine != null) {

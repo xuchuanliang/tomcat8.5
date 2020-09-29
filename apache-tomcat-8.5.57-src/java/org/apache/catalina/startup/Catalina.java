@@ -529,7 +529,7 @@ public class Catalina {
      * Start a new server instance.
      */
     public void load() {
-
+        System.out.println("------------------------------->调用Catalina的load方法：Catalina.load()");
         if (loaded) {
             return;
         }
@@ -544,6 +544,7 @@ public class Catalina {
 
         // Create and execute our Digester，
         // 创建一个Digester，主要是用来解析xml文件
+        System.out.println("------------------------------->创建xml解析器Digester，用来解析server.xml文件");
         Digester digester = createStartDigester();
 
         InputSource inputSource = null;
@@ -610,6 +611,7 @@ public class Catalina {
                 inputSource.setByteStream(inputStream);
                 digester.push(this);
                 //开始解析server.xml文件
+                System.out.println("------------------------------->开始解析server.xml文件");
                 digester.parse(inputSource);
             } catch (SAXParseException spe) {
                 log.warn("Catalina.start using " + getConfigFile() + ": " +

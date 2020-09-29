@@ -140,6 +140,7 @@ public final class Bootstrap {
 
 
     private void initClassLoaders() {
+        System.out.println("------------------------------->初始化类加载器：bootstrap.initClassLoaders()");
         try {
             commonLoader = createClassLoader("common", null);
             if (commonLoader == null) {
@@ -247,6 +248,7 @@ public final class Bootstrap {
      * @throws Exception Fatal initialization error
      */
     public void init() throws Exception {
+//        System.out.println("------------------------------->启动类初始化：bootstrap.init()");
 
         initClassLoaders();
 
@@ -258,11 +260,13 @@ public final class Bootstrap {
         if (log.isDebugEnabled())
             log.debug("Loading startup class");
         Class<?> startupClass = catalinaLoader.loadClass("org.apache.catalina.startup.Catalina");
+        System.out.println("------------------------------->反射创建Catalina对象");
         Object startupInstance = startupClass.getConstructor().newInstance();
 
         // Set the shared extensions class loader
-        if (log.isDebugEnabled())
+        if (log.isDebugEnabled()) {
             log.debug("Setting startup class properties");
+        }
         String methodName = "setParentClassLoader";
         Class<?> paramTypes[] = new Class[1];
         paramTypes[0] = Class.forName("java.lang.ClassLoader");
@@ -438,6 +442,7 @@ public final class Bootstrap {
             if (daemon == null) {
                 // Don't set daemon until init() has completed
                 //创建Bootstrap启动类对象
+                System.out.println("------------------------------->创建Bootstrap启动类");
                 Bootstrap bootstrap = new Bootstrap();
                 try {
                     //调用启动类对象 Bootstrap的初始化方法，在初始化方法中做了一下几件事情
@@ -447,7 +452,9 @@ public final class Bootstrap {
                     3.反射调用Catalina的setParentClassLoader()方法，设置Catalina的父类加载器；
                     5.设置BootStrap的属性catalina指向刚创建的Catalina对象
                      */
+                    System.out.println("------------------------------->启动类初始化：Bootstrap.init()");
                     bootstrap.init();
+                    System.out.println("------------------------------->启动类初始化完成：Bootstrap.init()");
                 } catch (Throwable t) {
                     handleThrowable(t);
                     t.printStackTrace();
@@ -479,9 +486,13 @@ public final class Bootstrap {
                 daemon.setAwait(true);
                 //加载xml文件
                 //实际上是调用Catalina的load()方法
+                System.out.println("------------------------------->调用启动类的加载方法：Bootstrap.load()");
                 daemon.load(args);
+                System.out.println("------------------------------->启动类的加载方法结束：Bootstrap.load()");
                 //
+                System.out.println("------------------------------->调用启动类的启动方法：Bootstrap.start()");
                 daemon.start();
+                System.out.println("------------------------------->启动类的启动方法结束：Bootstrap.start()");
                 if (null == daemon.getServer()) {
                     System.exit(1);
                 }

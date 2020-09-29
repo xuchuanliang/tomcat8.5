@@ -798,6 +798,7 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
      */
     @Override
     protected void initInternal() throws LifecycleException {
+        System.out.println("------------------------------->开始初始化server：StandardServer.initInternal()");
 
         super.initInternal();
 
