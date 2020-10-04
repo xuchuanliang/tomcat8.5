@@ -483,7 +483,7 @@ public final class Bootstrap {
                 args[args.length - 1] = "stop";
                 daemon.stop();
             } else if (command.equals("start")) {
-                daemon.setAwait(true);
+                daemon.setAwait(true);//设置Catalina的阻塞标识，如果是true则阻塞，false则不阻塞
                 //加载xml文件
                 //实际上是调用Catalina的load()方法
                 System.out.println("------------------------------->调用启动类的加载方法：Bootstrap.load()");

@@ -46,6 +46,7 @@ import org.apache.tomcat.util.digester.Rule;
 import org.apache.tomcat.util.digester.RuleSet;
 import org.apache.tomcat.util.log.SystemLogHandler;
 import org.apache.tomcat.util.res.StringManager;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXParseException;
@@ -676,7 +677,7 @@ public class Catalina {
      * Start a new server instance.
      */
     public void start() {
-
+        System.out.println("------------------------------->调用Catalina类的启动方法：Catalina.start()");
         if (getServer() == null) {
             load();
         }

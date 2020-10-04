@@ -253,7 +253,7 @@ public class NioEndpoint extends AbstractJsseEndpoint<NioChannel> {
      */
     @Override
     public void startInternal() throws Exception {
-
+        System.out.println("------------------------------->调用NioEndpoint的start方法：NioEndpoint.start()");
         if (!running) {
             running = true;
             paused = false;

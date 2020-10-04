@@ -1042,7 +1042,7 @@ public class Connector extends LifecycleMBeanBase  {
     protected void initInternal() throws LifecycleException {
 
         super.initInternal();
-
+        System.out.println("");
         // Initialize adapter
         adapter = new CoyoteAdapter(this);
         protocolHandler.setAdapter(adapter);
@@ -1087,7 +1087,7 @@ public class Connector extends LifecycleMBeanBase  {
      */
     @Override
     protected void startInternal() throws LifecycleException {
-
+        System.out.println("------------------------------->调用Connector的start方法：Connector.start()");
         // Validate settings before starting
         if (getPort() < 0) {
             throw new LifecycleException(sm.getString(

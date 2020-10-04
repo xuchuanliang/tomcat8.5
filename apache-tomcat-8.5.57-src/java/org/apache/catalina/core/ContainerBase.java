@@ -908,6 +908,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
         // Start our subordinate components, if any
         logger = null;
         getLogger();
+        System.out.println("------------------------------->在Engine的父类：ContainerBase处理tomcat集群相关事情，此处可以看出来一个Engine其实代表了一个tomcat中的servlet容器");
         Cluster cluster = getClusterInternal();
         if (cluster instanceof Lifecycle) {
             ((Lifecycle) cluster).start();
@@ -918,6 +919,7 @@ public abstract class ContainerBase extends LifecycleMBeanBase
         }
 
         // Start our child containers, if any
+        System.out.println("------------------------------->获取Engine的子容器，其实获取的是host");
         Container children[] = findChildren();
         List<Future<Void>> results = new ArrayList<>();
         for (Container child : children) {

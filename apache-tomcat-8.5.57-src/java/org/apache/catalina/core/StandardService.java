@@ -411,7 +411,7 @@ public class StandardService extends LifecycleMBeanBase implements Service {
      */
     @Override
     protected void startInternal() throws LifecycleException {
-
+        System.out.println("------------------------------->调用StandardService的启动方法：StandardService.start()");
         if(log.isInfoEnabled())
             log.info(sm.getString("standardService.start.name", this.name));
         setState(LifecycleState.STARTING);
@@ -425,6 +425,7 @@ public class StandardService extends LifecycleMBeanBase implements Service {
 
         synchronized (executors) {
             for (Executor executor: executors) {
+                System.out.println("------------------------------->循环启动Executor");
                 executor.start();
             }
         }
@@ -435,6 +436,7 @@ public class StandardService extends LifecycleMBeanBase implements Service {
         synchronized (connectorsLock) {
             for (Connector connector: connectors) {
                 try {
+                    System.out.println("------------------------------->循环调用Connector的start方法");
                     // If it has already failed, don't try and start it
                     if (connector.getState() != LifecycleState.FAILED) {
                         connector.start();
@@ -546,7 +548,7 @@ public class StandardService extends LifecycleMBeanBase implements Service {
         mapperListener.init();
 
         // Initialize our defined Connectors
-        synchronized (connectorsLock) {
+        synchronized (connectorsLock) {System.out.println("循环遍历初始化connector");
             for (Connector connector : connectors) {
                 try {
                     connector.init();

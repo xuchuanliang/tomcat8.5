@@ -590,6 +590,7 @@ public abstract class AbstractProtocol<S> implements ProtocolHandler,
 
     @Override
     public void start() throws Exception {
+        System.out.println("------------------------------->调用AbstractProtocol的start方法：AbstractProtocol.start()");
         if (getLog().isInfoEnabled()) {
             getLog().info(sm.getString("abstractProtocolHandler.start", getName()));
         }
